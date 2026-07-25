@@ -20,15 +20,6 @@ function lerp(start: number, end: number, progress: number) {
   return start + (end - start) * progress;
 }
 
-function parseStyleNumber(value: string | null, fallback: number) {
-  if (!value) {
-    return fallback;
-  }
-
-  const parsed = Number.parseFloat(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
 export function SwissbrutMotion() {
   useEffect(() => {
     const page = document.querySelector<HTMLElement>("[data-swissbrut-page]");
@@ -74,7 +65,7 @@ export function SwissbrutMotion() {
       });
       contact?.style.setProperty("--contact-footer-y", "0vh");
       contactStatement?.style.setProperty("--contact-statement-x", "0vw");
-      contactStatement?.style.setProperty("--contact-statement-y", "0vh");
+      contactStatement?.style.setProperty("--contact-statement-y", "0px");
       contactStatement?.style.setProperty("--contact-left-x", "0px");
       contactStatement?.style.setProperty("--contact-right-x", "0px");
       contactImage?.style.setProperty("--contact-image-opacity", "1");
@@ -252,67 +243,54 @@ export function SwissbrutMotion() {
             ? Math.min(viewportWidth * 0.56, 480)
             : Math.min(viewportWidth * 0.34, 480);
         const startH = startW * (1108 / 960);
-        const fixedTop = viewportHeight * 0.5 - startH / 2;
-        const handoffStart = fixedTop;
-        const handoffDistance = Math.max(1, handoffStart + travel * (isMobile ? 0.78 : 0.74));
-        const handoffProgress = clamp((handoffStart - rect.top) / handoffDistance);
-        const captionExit = smoother((handoffProgress - 0.05) / 0.2);
-        const morph = smoother((handoffProgress - 0.04) / 0.64);
-        const verticalMorph = smoother((handoffProgress - 0.24) / 0.48);
-        const wordProgress = smoother((handoffProgress + 0.02) / 0.66);
-        const statementReveal = smoother((handoffProgress + 0.08) / 0.3);
-        const footerProgress = smoother((progress - 0.48) / 0.3);
-        const largeX = (viewportWidth - startW) / 2 - stageRect.left;
         const largeW = startW;
         const largeH = startH;
         const leftWord = contactImageSlot.previousElementSibling as HTMLElement | null;
         const rightWord = contactImageSlot.nextElementSibling as HTMLElement | null;
         const balanceX = leftWord && rightWord ? (rightWord.offsetWidth - leftWord.offsetWidth) / 2 : 0;
         const sideDistance = viewportWidth * (isMobile ? 0.62 : isTablet ? 0.56 : 0.5);
+        const fixedTop = viewportHeight * 0.5 - startH / 2;
+        const handoffDistance = Math.max(1, fixedTop + travel * (isMobile ? 0.68 : isTablet ? 0.7 : 0.72));
+        const handoffProgress = clamp((fixedTop - rect.top) / handoffDistance);
+        const contactEase = smoother(handoffProgress);
+        const captionExit = smoother((handoffProgress - 0.02) / 0.22);
+        const handoffOpacity = smoother(handoffProgress / 0.12);
+        const morph = smoother((handoffProgress - 0.02) / 0.7);
+        const wordProgress = smoother((handoffProgress + 0.01) / 0.68);
         const statementX = balanceX;
-        const statementY = lerp(3.2, 0, statementReveal);
-        const statementYPx = viewportHeight * (statementY / 100);
-        const footerY = lerp(16, 0, footerProgress);
+        const statementY = -stageRect.top;
+        const stageCenterX = viewportWidth * 0.5 - stageRect.left;
+        const stageCenterY = viewportHeight * 0.5 - stageRect.top;
 
         contactStatement.style.setProperty("--contact-statement-x", `${statementX.toFixed(3)}px`);
-        contactStatement.style.setProperty("--contact-statement-y", `${statementY.toFixed(3)}vh`);
+        contactStatement.style.setProperty("--contact-statement-y", `${statementY.toFixed(3)}px`);
         contactStatement.style.setProperty("--contact-left-x", `${lerp(-sideDistance, 0, wordProgress).toFixed(3)}px`);
         contactStatement.style.setProperty("--contact-right-x", `${lerp(sideDistance, 0, wordProgress).toFixed(3)}px`);
 
-        const slotRect = contactImageSlot.getBoundingClientRect();
-        const smallW = slotRect.width;
-        const smallH = slotRect.height;
-        const smallX = slotRect.left - stageRect.left;
-        const smallY = slotRect.top - stageRect.top * 2 - statementYPx;
-        const imageX = lerp(largeX, smallX, morph);
+        const smallW = contactImageSlot.offsetWidth;
+        const smallH = contactImageSlot.offsetHeight;
         const imageW = lerp(largeW, smallW, morph);
         const imageH = lerp(largeH, smallH, morph);
-        const centeredY = viewportHeight * 0.5 - imageH / 2 - stageRect.top;
-        const slotCenteredY = smallY + smallH / 2 - imageH / 2;
-        const imageY = lerp(centeredY, slotCenteredY, verticalMorph);
+        const imageX = stageCenterX - imageW / 2;
+        const imageY = stageCenterY - imageH / 2;
         const imageIsLive = handoffProgress > 0 || progress > 0.001;
 
         if (imageIsLive && people && personCards.length > 0) {
-          const currentStageOpacity = parseStyleNumber(people.style.getPropertyValue("--person-stage-opacity"), 1);
-          const nextHandoffOpacity = 0;
           const nextCaptionOpacity = 1 - captionExit;
+          const stageOpacity = 1 - handoffOpacity;
 
-          people.style.setProperty("--person-stage-opacity", Math.min(currentStageOpacity, nextHandoffOpacity).toFixed(3));
+          people.style.setProperty("--person-stage-opacity", stageOpacity.toFixed(3));
           const caption = personCards[0].querySelector<HTMLElement>("p");
 
           if (caption) {
-            const currentCaptionOpacity = parseStyleNumber(caption.style.getPropertyValue("--person-caption-opacity"), 1);
-            const currentCaptionBlur = parseStyleNumber(caption.style.getPropertyValue("--person-caption-blur"), 0);
-            const currentCaptionY = parseStyleNumber(caption.style.getPropertyValue("--person-caption-y"), 0);
-
-            caption.style.setProperty("--person-caption-opacity", Math.min(currentCaptionOpacity, nextCaptionOpacity).toFixed(3));
-            caption.style.setProperty("--person-caption-blur", `${Math.max(currentCaptionBlur, lerp(0, 10, captionExit)).toFixed(3)}px`);
-            caption.style.setProperty("--person-caption-y", `${Math.max(currentCaptionY, lerp(0, 0.55, captionExit)).toFixed(3)}rem`);
+            caption.style.setProperty("--person-caption-opacity", nextCaptionOpacity.toFixed(3));
+            caption.style.setProperty("--person-caption-blur", `${lerp(0, 10, captionExit).toFixed(3)}px`);
+            caption.style.setProperty("--person-caption-y", `${lerp(0, 0.55, captionExit).toFixed(3)}rem`);
           }
         }
 
-        contact.style.setProperty("--contact-footer-y", `${footerY.toFixed(3)}vh`);
-        contactImage.style.setProperty("--contact-image-opacity", imageIsLive ? "1" : "0");
+        contact.style.setProperty("--contact-footer-y", "0vh");
+        contactImage.style.setProperty("--contact-image-opacity", imageIsLive ? contactEase.toFixed(3) : "0");
         contactImage.style.setProperty("--contact-image-x", `${imageX.toFixed(3)}px`);
         contactImage.style.setProperty("--contact-image-y", `${imageY.toFixed(3)}px`);
         contactImage.style.setProperty("--contact-image-w", `${imageW.toFixed(3)}px`);

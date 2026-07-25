@@ -694,7 +694,7 @@
 .contactCtaTrack {
   position: relative;
   z-index: 1;
-  block-size: 116svh;
+  block-size: 112svh;
   overflow: clip;
   background: transparent;
 }
@@ -709,11 +709,11 @@
 
 .contactStatement {
   --contact-statement-x: 0px;
-  --contact-statement-y: 0vh;
+  --contact-statement-y: 0px;
   --contact-left-x: 0px;
   --contact-right-x: 0px;
   position: absolute;
-  inset-block-start: 38svh;
+  inset-block-start: 50%;
   inset-inline-start: 50%;
   z-index: 1;
   display: flex;
@@ -728,7 +728,7 @@
   letter-spacing: -0.075em;
   line-height: 0.72;
   opacity: 1;
-  transform: translate3d(calc(-50% + var(--contact-statement-x, 0px)), var(--contact-statement-y, 0vh), 0);
+  transform: translate3d(calc(-50% + var(--contact-statement-x, 0px)), calc(-50% + var(--contact-statement-y, 0px)), 0);
   transform-origin: 50% 50%;
   perspective: 1200px;
   white-space: nowrap;
@@ -844,7 +844,7 @@
   min-block-size: 26svh;
   margin-block-start: -26svh;
   border-block-start: 0;
-  padding: 0 var(--brut-page-x) var(--brut-page-x);
+  padding: 0 var(--brut-page-x);
   background: #ffffff;
   opacity: 1;
   transform: translate3d(0, var(--contact-footer-y, 0vh), 0);
@@ -1105,11 +1105,10 @@
   }
 
   .contactCtaTrack {
-    block-size: 112svh;
+    block-size: 110svh;
   }
 
   .contactStatement {
-    inset-block-start: 37svh;
     font-size: clamp(7.5rem, 24vw, 13rem);
   }
 
@@ -1130,7 +1129,7 @@
     gap: 1.5rem 1rem;
     min-block-size: 32svh;
     margin-block-start: -32svh;
-    padding-block-end: clamp(1rem, 2.8vw, 1.35rem);
+    padding-block-end: 0;
   }
 
   .contactFooter > div {
@@ -1178,7 +1177,6 @@
   }
 
   .contactStatement {
-    inset-block-start: 36svh;
     font-size: clamp(5rem, 31vw, 8.5rem);
   }
 
@@ -1217,8 +1215,8 @@
   }
 
   .contactFooter {
-    min-block-size: 25svh;
-    margin-block-start: -25svh;
+    min-block-size: 27svh;
+    margin-block-start: -27svh;
     font-size: 0.78rem;
   }
 
