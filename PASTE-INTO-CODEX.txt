@@ -1,0 +1,3 @@
+Read `AGENTS.md` and execute `MASTER-CODEX-PROMPT.md` completely.
+
+Use all supplied local assets and seed data. Build the finished Pinna.design site in this repository. Do not clone or browse for a reference website. Do not stop after scaffolding. Run lint, typecheck, tests, browser tests and the production build; repair confirmed failures before returning the final report.

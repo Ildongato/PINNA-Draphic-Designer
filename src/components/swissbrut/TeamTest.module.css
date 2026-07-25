@@ -1,0 +1,161 @@
+.page {
+  min-block-size: 100svh;
+  background: #ffffff;
+  color: #050505;
+}
+
+.hero {
+  position: relative;
+  min-block-size: 100svh;
+  padding: calc(var(--header-height) + 1rem) var(--page-x) clamp(2rem, 5vw, 4rem);
+  overflow: clip;
+}
+
+.label {
+  position: absolute;
+  inset-block-start: calc(var(--header-height) + 2rem);
+  inset-inline-start: var(--page-x);
+  margin: 0;
+  color: rgb(5 5 5 / 0.58);
+  font-size: var(--step--1);
+  font-weight: 800;
+  text-transform: none;
+}
+
+.hero h1 {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.person {
+  position: relative;
+  min-block-size: calc(100svh - var(--header-height) - 3rem);
+  perspective: 1200px;
+}
+
+.name {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: -0.02em;
+  z-index: 2;
+  display: grid;
+  margin: 0;
+  font-size: clamp(7rem, 18vw, 18rem);
+  font-weight: 900;
+  letter-spacing: -0.075em;
+  line-height: 0.72;
+  perspective: 0.9em;
+  transform-style: preserve-3d;
+  white-space: nowrap;
+}
+
+.readableName {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.nameLine {
+  display: inline-block;
+  overflow: clip;
+  opacity: 0;
+  transform: rotateX(-86deg) translate3d(0, 0.22em, 0);
+  transform-origin: 50% 78%;
+  backface-visibility: hidden;
+  animation: nameFlip 940ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(320ms + var(--flip-delay, 0ms));
+}
+
+.nameLine + .nameLine {
+  margin-block-start: -0.12em;
+}
+
+.image {
+  position: absolute;
+  inset-block-start: clamp(4rem, 10vw, 8rem);
+  inset-inline-end: clamp(1rem, 9vw, 9rem);
+  z-index: 3;
+  inline-size: clamp(20rem, 46vw, 50rem);
+  aspect-ratio: 1542 / 1035;
+  overflow: clip;
+  background: #d6d6d6;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.08);
+  animation: imageFlip 980ms cubic-bezier(0.16, 1, 0.3, 1) 440ms both;
+}
+
+.image img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04);
+  transform: scale(1.03);
+}
+
+@keyframes nameFlip {
+  from {
+    opacity: 0;
+    transform: rotateX(-86deg) translate3d(0, 0.22em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes imageFlip {
+  from {
+    opacity: 0;
+    transform: rotateX(-76deg) rotateZ(-3deg) translate3d(0, 3rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) rotateZ(0deg) translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-block-size: 82svh;
+  }
+
+  .person {
+    min-block-size: calc(82svh - var(--header-height) - 3rem);
+  }
+
+  .name {
+    inset-block-end: -0.04em;
+    font-size: clamp(5.8rem, 25vw, 11rem);
+  }
+
+  .image {
+    inset-block-start: clamp(5rem, 18vw, 7rem);
+    inset-inline: auto 0;
+    inline-size: min(86vw, 34rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nameLine,
+  .image {
+    animation: none;
+  }
+
+  .nameLine,
+  .image {
+    opacity: 1;
+    transform: none;
+  }
+}

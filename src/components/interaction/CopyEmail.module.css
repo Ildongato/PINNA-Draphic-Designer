@@ -1,0 +1,20 @@
+.wrap {
+  display: inline-grid;
+  gap: 0.35rem;
+}
+
+.button {
+  min-block-size: 44px;
+  padding: 0;
+  border: 0;
+  border-block-end: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+}
+
+.status {
+  min-block-size: 1.2em;
+  color: var(--muted-on-light);
+  font-size: var(--step--1);
+}

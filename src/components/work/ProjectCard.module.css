@@ -1,0 +1,115 @@
+.card {
+  grid-column: span 6;
+  display: block;
+  color: inherit;
+}
+
+.featuredCard {
+  grid-column: 1 / span 12;
+}
+
+.card:focus-visible {
+  outline-offset: 7px;
+}
+
+.card:hover img,
+.card:focus-visible img {
+  transform: scale(1.025);
+}
+
+.card:hover .title,
+.card:focus-visible .title {
+  transform: translateX(0.35rem);
+}
+
+.article {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.article[data-featured="true"] {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: end;
+}
+
+.article[data-featured="true"] [data-media] {
+  grid-column: 1 / span 8;
+}
+
+.article[data-featured="true"] .meta {
+  grid-column: 9 / span 4;
+  align-self: end;
+  padding-block: clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr auto;
+  gap: 0.8rem;
+  align-items: baseline;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--hairline-dark);
+}
+
+.index,
+.details {
+  color: var(--muted-on-dark);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 0.75vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.9;
+  transition: transform var(--duration-control) var(--ease-out);
+}
+
+.article[data-featured="true"] .title {
+  max-inline-size: 7ch;
+  font-size: clamp(3.2rem, 6.8vw, 8rem);
+  line-height: 0.78;
+}
+
+.details {
+  margin: 0;
+  text-align: end;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .card {
+    grid-column: auto;
+    inline-size: 100%;
+  }
+
+  .article[data-featured="true"] {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .article[data-featured="true"] [data-media],
+  .article[data-featured="true"] .meta {
+    grid-column: auto;
+  }
+
+  .meta {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .article[data-featured="true"] .title {
+    max-inline-size: none;
+    font-size: clamp(2.8rem, 15vw, 4.8rem);
+  }
+
+  .details {
+    grid-column: 2;
+    text-align: start;
+    white-space: normal;
+  }
+}

@@ -1,0 +1,19 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  pointer-events: none;
+}
+
+.clone {
+  position: fixed;
+  overflow: clip;
+  background: var(--paper);
+  will-change: transform, opacity;
+}
+
+.clone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

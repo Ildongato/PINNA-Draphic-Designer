@@ -1,0 +1,35 @@
+.field {
+  position: relative;
+  color: currentColor;
+  transform: translateZ(0);
+}
+
+.field svg {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.line {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transition: transform 420ms var(--ease-out);
+}
+
+.field[data-active="true"] .lineA {
+  transform: translate3d(var(--field-x-a, 0), var(--field-y-a, 0), 0);
+}
+
+.field[data-active="true"] .lineB {
+  transform: translate3d(var(--field-x-b, 0), var(--field-y-b, 0), 0);
+}
+
+.field[data-active="true"] .lineC {
+  transform: translate3d(var(--field-x-c, 0), var(--field-y-c, 0), 0);
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .line {
+    transform: none !important;
+    transition: none;
+  }
+}

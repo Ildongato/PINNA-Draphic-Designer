@@ -1,0 +1,221 @@
+.hero {
+  min-block-size: 100svh;
+  padding: calc(var(--header-height) + clamp(1.25rem, 3vw, 2.25rem)) var(--page-x) clamp(1.25rem, 3vw, 2.25rem);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem) var(--grid-gap);
+  min-block-size: calc(100svh - var(--header-height) - clamp(2.5rem, 6vw, 4.5rem));
+}
+
+.kicker {
+  grid-column: 1 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: start;
+  padding-block-end: clamp(1rem, 2.6vw, 2rem);
+  border-block-end: 1px solid var(--hairline-light);
+}
+
+.eyebrow {
+  grid-column: 1 / span 4;
+  margin: 0;
+  color: var(--muted-on-light);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+
+.support {
+  grid-column: 8 / span 5;
+  margin: 0;
+  max-inline-size: 31rem;
+  color: var(--muted-on-light);
+  font-size: clamp(1rem, 1.45vw, 1.45rem);
+  line-height: 1.16;
+  text-wrap: pretty;
+}
+
+.headline {
+  grid-column: 1 / span 10;
+  max-inline-size: 13.5ch;
+  margin: 0;
+  padding-block-start: clamp(0.25rem, 1vw, 0.75rem);
+  font-size: clamp(4.5rem, 9.4vw, 10.75rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.78;
+  text-wrap: balance;
+}
+
+.visualGrid {
+  grid-column: 1 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: clamp(1rem, 1.8vw, 1.75rem) var(--grid-gap);
+  align-self: end;
+  margin-block-start: auto;
+}
+
+.primaryVisual {
+  grid-column: 1 / span 8;
+  grid-row: 1 / span 2;
+}
+
+.secondaryVisual {
+  grid-column: 9 / span 4;
+}
+
+.primaryVisual,
+.secondaryVisual {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.visualCaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  color: var(--muted-on-light);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+
+.meta {
+  grid-column: 1 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: end;
+  padding-block-start: clamp(1rem, 2vw, 1.5rem);
+}
+
+.disciplines {
+  grid-column: 1 / span 6;
+  margin: 0;
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+
+.status {
+  grid-column: 9 / span 3;
+  margin: 0;
+  color: var(--muted-on-light);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+}
+
+.cue {
+  grid-column: 12;
+  justify-self: end;
+  inline-size: 1px;
+  block-size: 52px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-block-size: auto;
+    gap: clamp(1.5rem, 5vw, 2.75rem);
+  }
+
+  .kicker,
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .eyebrow,
+  .support {
+    grid-column: auto;
+  }
+
+  .support {
+    max-inline-size: 38rem;
+  }
+
+  .headline {
+    grid-column: auto;
+    max-inline-size: 10ch;
+  }
+
+  .visualGrid {
+    grid-column: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .primaryVisual {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+  }
+
+  .secondaryVisual {
+    grid-column: auto;
+  }
+
+  .meta {
+    grid-column: auto;
+  }
+
+  .cue {
+    grid-column: auto;
+    justify-self: start;
+    block-size: 38px;
+  }
+
+  .disciplines,
+  .status {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero {
+    min-block-size: auto;
+    padding-block-end: 3.5rem;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kicker {
+    display: block;
+  }
+
+  .support {
+    max-inline-size: 100%;
+    margin-block-start: 1rem;
+    overflow-wrap: break-word;
+  }
+
+  .headline {
+    max-inline-size: 8ch;
+    font-size: clamp(3.8rem, 17vw, 5.8rem);
+    line-height: 0.82;
+  }
+
+  .visualGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-self: stretch;
+    margin-block-start: 0;
+  }
+
+  .primaryVisual,
+  .secondaryVisual {
+    grid-column: auto;
+  }
+}
