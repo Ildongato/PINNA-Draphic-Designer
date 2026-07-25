@@ -95,7 +95,7 @@ export function SwissbrutHome() {
           </ProjectTransitionLink>
           <div className={styles.heroPanel}>
             <div className={styles.heroTop}>
-              <p>Graphic<br />Design Studio</p>
+              <p>Freelance<br />Graphic Designer</p>
               <p>Antwerp<br />Belgium</p>
             </div>
             <h1 id="hero-title" className={styles.heroTitle}>
