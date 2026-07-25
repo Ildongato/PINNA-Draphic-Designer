@@ -713,7 +713,7 @@
   --contact-left-x: 0px;
   --contact-right-x: 0px;
   position: absolute;
-  inset-block-start: 30svh;
+  inset-block-start: 38svh;
   inset-inline-start: 50%;
   z-index: 1;
   display: flex;
@@ -1109,7 +1109,7 @@
   }
 
   .contactStatement {
-    inset-block-start: 28svh;
+    inset-block-start: 37svh;
     font-size: clamp(7.5rem, 24vw, 13rem);
   }
 
@@ -1178,7 +1178,7 @@
   }
 
   .contactStatement {
-    inset-block-start: 9svh;
+    inset-block-start: 36svh;
     font-size: clamp(5rem, 31vw, 8.5rem);
   }
 

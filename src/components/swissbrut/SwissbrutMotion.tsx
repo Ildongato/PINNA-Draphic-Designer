@@ -257,12 +257,12 @@ export function SwissbrutMotion() {
         const handoffDistance = Math.max(1, handoffStart + travel * (isMobile ? 0.78 : 0.74));
         const handoffProgress = clamp((handoffStart - rect.top) / handoffDistance);
         const captionExit = smoother((handoffProgress - 0.05) / 0.2);
-        const morph = smoother((handoffProgress - 0.02) / 0.72);
+        const morph = smoother((handoffProgress - 0.04) / 0.64);
+        const verticalMorph = smoother((handoffProgress - 0.24) / 0.48);
         const wordProgress = smoother((handoffProgress + 0.02) / 0.66);
         const statementReveal = smoother((handoffProgress + 0.08) / 0.3);
         const footerProgress = smoother((progress - 0.48) / 0.3);
         const largeX = (viewportWidth - startW) / 2 - stageRect.left;
-        const largeY = fixedTop - stageRect.top;
         const largeW = startW;
         const largeH = startH;
         const leftWord = contactImageSlot.previousElementSibling as HTMLElement | null;
@@ -285,9 +285,11 @@ export function SwissbrutMotion() {
         const smallX = slotRect.left - stageRect.left;
         const smallY = slotRect.top - stageRect.top * 2 - statementYPx;
         const imageX = lerp(largeX, smallX, morph);
-        const imageY = lerp(largeY, smallY, morph);
         const imageW = lerp(largeW, smallW, morph);
         const imageH = lerp(largeH, smallH, morph);
+        const centeredY = viewportHeight * 0.5 - imageH / 2 - stageRect.top;
+        const slotCenteredY = smallY + smallH / 2 - imageH / 2;
+        const imageY = lerp(centeredY, slotCenteredY, verticalMorph);
         const imageIsLive = handoffProgress > 0 || progress > 0.001;
 
         if (imageIsLive && people && personCards.length > 0) {
