@@ -1,0 +1,4 @@
+:HL["/PINNA-Draphic-Designer/_next/static/chunks/28nexe-v191-v.css","style"]
+:HL["/PINNA-Draphic-Designer/_next/static/chunks/0n-qzp1_xulih.css","style"]
+:HL["/PINNA-Draphic-Designer/_next/static/chunks/3k8__3odk608x.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"work","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"field-notes","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"k7l-BCZDj_OJM0MbcZSRL"}

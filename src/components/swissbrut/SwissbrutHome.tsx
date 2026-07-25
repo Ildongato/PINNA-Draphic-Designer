@@ -5,6 +5,7 @@ import { ProjectTransitionLink } from "@/components/interaction/ProjectTransitio
 import { ProjectMedia } from "@/components/work/ProjectMedia";
 import { projects } from "@/data/projects";
 import { site } from "@/data/site";
+import { assetPath } from "@/lib/assets";
 import { SwissbrutMotion } from "./SwissbrutMotion";
 import styles from "./SwissbrutHome.module.css";
 
@@ -245,10 +246,10 @@ export function SwissbrutHome() {
         <div className={styles.personFeature} data-people-motion>
           <div className={styles.personStage}>
             <div className={styles.personImage} data-person-card>
-              <Image
-                src={person.image}
-                alt={person.alt}
-                width={960}
+                <Image
+                  src={assetPath(person.image)}
+                  alt={person.alt}
+                  width={960}
                 height={1108}
                 sizes="(max-width: 700px) 82vw, (max-width: 900px) 56vw, 34vw"
                 loading="eager"
@@ -279,10 +280,10 @@ export function SwissbrutHome() {
               <span data-contact-word="right">talk.</span>
             </p>
             <div className={styles.contactImage} data-contact-image aria-hidden="true">
-              <Image
-                src={person.image}
-                alt=""
-                width={960}
+                <Image
+                  src={assetPath(person.image)}
+                  alt=""
+                  width={960}
                 height={1108}
                 sizes="(max-width: 700px) 92vw, 99vw"
                 loading="eager"

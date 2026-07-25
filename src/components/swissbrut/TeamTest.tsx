@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import { assetPath } from "@/lib/assets";
 import styles from "./TeamTest.module.css";
 
 const personName = "Giosi Pinna";
@@ -18,7 +19,7 @@ export function TeamTest() {
         <div className={styles.person}>
           <div className={styles.image} aria-hidden="true">
             <Image
-              src="/images/team/giosi.jpg"
+              src={assetPath("/images/team/giosi.jpg")}
               alt=""
               width={1542}
               height={1035}

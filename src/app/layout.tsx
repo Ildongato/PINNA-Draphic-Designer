@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { site } from "@/data/site";
 import { ProjectTransitionProvider } from "@/components/interaction/ProjectTransitionProvider";
 import { RevealEnhancer } from "@/components/interaction/RevealEnhancer";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { site } from "@/data/site";
+import { assetPath } from "@/lib/assets";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     images: [
       {
-        url: "/brand/og-image.webp",
+        url: assetPath("/brand/og-image.webp"),
         width: 1200,
         height: 630,
         alt: "Pinna design graphic identity preview"
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     type: "website"
   },
   icons: {
-    icon: "/brand/favicon.svg"
+    icon: assetPath("/brand/favicon.svg")
   }
 };
 

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, type CSSProperties } from "react";
+import { assetPath } from "@/lib/assets";
 import styles from "./ProjectMedia.module.css";
 
 type CSSVars = CSSProperties & {
@@ -34,7 +35,7 @@ export function ProjectMedia({
   className
 }: ProjectMediaProps) {
   const [failed, setFailed] = useState(false);
-  const imageSrc = failed ? "/brand/media-fallback.svg" : src;
+  const imageSrc = assetPath(failed ? "/brand/media-fallback.svg" : src);
 
   return (
     <figure

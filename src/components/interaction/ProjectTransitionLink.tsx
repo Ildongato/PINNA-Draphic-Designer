@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
+import { assetPath } from "@/lib/assets";
 import { useProjectTransition } from "./ProjectTransitionProvider";
 
 type ProjectTransitionLinkProps = Omit<
@@ -52,7 +53,7 @@ export function ProjectTransitionLink({
 
     event.preventDefault();
     router.prefetch(href);
-    await transitionTo(href, { src: mediaSrc, alt: mediaAlt, rect: media.getBoundingClientRect() }, () => {
+    await transitionTo(href, { src: assetPath(mediaSrc), alt: mediaAlt, rect: media.getBoundingClientRect() }, () => {
       router.push(href);
     });
   }

@@ -142,7 +142,7 @@
 }
 
 .heroTitle {
-  margin: 0 0 -0.08em;
+  margin: 0 0 -0.08em -0.075em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: clamp(3.85rem, 5.8vw, 6.45rem);
   font-style: normal;

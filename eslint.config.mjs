@@ -5,11 +5,20 @@ const eslintConfig = [
   {
     ignores: [
       ".next/**",
+      "_next/**",
+      "_not-found/**",
+      "404/**",
+      "brand/**",
       "node_modules/**",
       "coverage/**",
+      "images/**",
       "test-results/**",
       "playwright-report/**",
-      "test-artifacts/**"
+      "test-artifacts/**",
+      "test/**",
+      "work/**",
+      "404.html",
+      "index.html"
     ]
   },
   ...nextCoreWebVitals,
